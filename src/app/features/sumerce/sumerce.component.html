@@ -1,0 +1,300 @@
+<main class="sumerce-page">
+  <!-- 01. HERO -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__floaters" aria-hidden="true">
+      </div>
+
+      <p class="kicker">SOLARTE EDITORES · SUMERCÉ</p>
+      <h1 class="hero__title">SUMERCÉ</h1>
+      <p class="hero__subtitle">Una agenda estudiantil para organizarse, construir hábitos y descubrir Colombia.</p>
+      <p class="hero__lead">
+        Un año escolar puede ser mucho más que tareas y fechas. Sumercé acompaña al estudiante a
+        organizar sus días, plantearse nuevos retos y descubrir las historias y culturas que hacen
+        parte de su país.
+      </p>
+      <a class="btn btn-primary" href="#que-es">Descubrir Sumercé <span>↓</span></a>
+
+      <div class="hero__agenda">
+        <div class="agenda-mock">
+          <div class="agenda-mock__page">
+            <span>SUMERCÉ</span>
+            <small>Agenda escolar 2027</small>
+          </div>
+          <div class="agenda-mock__page agenda-mock__page--right">
+            <small>Vélez · Santander</small>
+            <span>Perseverancia</span>
+          </div>
+        </div>
+        <img src="assets/8.png" alt="" class="hero__agenda-guardian" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 02. QUÉ ES SUMERCÉ -->
+  <section class="what-is section" id="que-es">
+    <div class="container what-is__grid">
+      <div class="what-is__copy">
+        <p class="section-kicker">Qué es Sumercé</p>
+        <h2>Es una agenda escolar.<br /><em>Pero no se queda ahí.</em></h2>
+        <p class="section-lead">
+          Sumercé parte de algo que los estudiantes ya conocen: una agenda escolar. Pero en lugar de
+          limitarse a organizar el día, cada página propone una oportunidad para aprender, construir
+          hábitos y descubrir algo nuevo.
+        </p>
+      </div>
+
+      <div class="what-is__flow">
+        <span *ngFor="let step of whatIsSteps; let last = last" class="flow-step">
+          {{ step }}
+          <em *ngIf="!last">↓</em>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03. TRES DIMENSIONES -->
+  <section class="dimensions section">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <p class="section-kicker">La experiencia</p>
+        <h2>Una agenda.<br /><em>Tres formas de vivir el año.</em></h2>
+      </div>
+
+      <div class="dimensions-row">
+        <ng-container *ngFor="let dimension of dimensions; let last = last">
+          <article class="dimension">
+            <span class="dimension__number">{{ dimension.number }}</span>
+            <h3>{{ dimension.title }}</h3>
+            <p>{{ dimension.text }}</p>
+            <ul>
+              <li *ngFor="let item of dimension.items">{{ item }}</li>
+            </ul>
+          </article>
+          <span class="dimension__connector" *ngIf="!last" aria-hidden="true">＋</span>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04. ASÍ SE VIVE UN MES -->
+  <section class="month section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="section-kicker">Un ejemplo real · Vélez, Santander</p>
+        <h2>Así se vive<br /><em>un mes con Sumercé.</em></h2>
+      </div>
+
+      <div class="month-layout">
+        <img src="assets/3.png" alt="Sofía, guardiana de la perseverancia" class="month__guide" />
+
+        <ol class="month-steps">
+          <li *ngFor="let step of journey">
+            <span class="month-steps__number">{{ step.number }}</span>
+            <div>
+              <h3>{{ step.title }}</h3>
+              <p>{{ step.text }}</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <p class="month-flow">
+        CONTEXTO <span>→</span> HISTORIA <span>→</span> VALOR <span>→</span> RETO
+        <span>→</span> SEGUIMIENTO <span>→</span> REFLEXIÓN
+      </p>
+    </div>
+  </section>
+
+  <!-- 05. TRACKERS -->
+  <section class="tracker section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="section-kicker">Del papel a la constancia</p>
+        <h2>Pequeños retos.<br /><em>Grandes procesos.</em></h2>
+      </div>
+
+      <div class="tracker-ladder">
+        <span *ngFor="let step of trackerLadder; let last = last">
+          {{ step }}
+          <em *ngIf="!last">↓</em>
+        </span>
+      </div>
+
+      <div class="tracker-tabs">
+        <button
+          *ngFor="let tab of trackerTabs; let i = index"
+          type="button"
+          [class.is-active]="activeTrackerIndex === i"
+          (click)="selectTracker(i)"
+        >
+          {{ tab.label }}
+        </button>
+      </div>
+
+      <div class="tracker-page">
+        <div class="tracker-grid">
+          <span
+            *ngFor="let day of days"
+            class="tracker-day"
+            [class.is-filled]="day <= activeTracker.filled"
+          >
+            <em>{{ day < 10 ? '0' + day : day }}</em>
+          </span>
+        </div>
+        <p class="tracker-note">
+          Los trackers viven en el papel: aquí solo te mostramos cómo se sienten al marcarlos día a día.
+        </p>
+      </div>
+
+      <p class="tracker-message">
+        Lo que se registra, se puede observar.<br />
+        Lo que se observa, se puede reconocer.<br />
+        <em>Y reconocer el propio progreso también hace parte de aprender.</em>
+      </p>
+
+      <div class="real-pages">
+        <p class="real-pages__label">Así se ve en la agenda real</p>
+        <div class="real-pages__grid">
+          <a
+            *ngFor="let page of realPages"
+            class="real-page"
+            [href]="page.image"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img [src]="page.image" [alt]="'Página de ' + page.name" />
+            <span>{{ page.name }} · {{ page.place }} <em>Ver página completa ↗</em></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06. COLOMBIA -->
+  <section class="colombia section">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <p class="section-kicker">El contexto</p>
+        <h2>Aprender también es<br /><em>saber de dónde venimos.</em></h2>
+        <p class="section-lead">
+          Colombia no aparece en Sumercé como una colección de datos. Aparece como un territorio
+          lleno de historias, personas, tradiciones y formas diferentes de vivir.
+        </p>
+      </div>
+
+      <div class="colombia-strip">
+        <span *ngFor="let example of colombiaExamples">
+          <strong>{{ example.place }}</strong> → {{ example.fact }}
+        </span>
+      </div>
+
+      <div class="colombia__map">
+        <div class="section-heading section-heading--center">
+          <h3>¿Cuánto de Colombia<br /><em>has descubierto?</em></h3>
+        </div>
+
+        <div class="map-board">
+          <div class="map-board__pins">
+            <button
+              *ngFor="let location of mapLocations"
+              type="button"
+              class="map-pin"
+              [class.is-active]="discoveredLocation === location"
+              (click)="showLocation(location)"
+            >
+              <span class="map-pin__dot">📍</span>
+              <span class="map-pin__place">{{ location.place }}</span>
+            </button>
+          </div>
+
+          <div class="map-board__detail">
+            <ng-container *ngIf="discoveredLocation; else mapEmpty">
+              <p class="map-board__region">{{ discoveredLocation.region }}</p>
+              <h3>{{ discoveredLocation.place }}</h3>
+              <p>{{ discoveredLocation.tradition }}</p>
+            </ng-container>
+            <ng-template #mapEmpty>
+              <p class="map-board__region">Toca un lugar</p>
+              <h3>Empieza a explorar</h3>
+              <p>Cada punto del mapa esconde una tradición y una historia por conocer.</p>
+            </ng-template>
+          </div>
+        </div>
+        <p class="map-caption">Cada lugar que conoces también forma parte de tu historia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07. PERSONAJES -->
+  <section class="guardians section">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <p class="section-kicker">Los acompañantes</p>
+        <h2>Los personajes<br /><em>de Sumercé.</em></h2>
+        <p class="section-lead">Cada uno representa una región y un valor. No son decoración: son guías del recorrido.</p>
+      </div>
+
+      <div class="guardian-row">
+        <article *ngFor="let guardian of guardians" class="guardian" [attr.data-accent]="guardian.accent">
+          <img [src]="guardian.image" [alt]="guardian.name" [title]="guardian.name" />
+          <h3>{{ guardian.name }}</h3>
+          <p>{{ guardian.place }}</p>
+          <span>{{ guardian.value }}</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08. COLEGIOS -->
+  <section class="school section">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <p class="section-kicker">Personalización institucional</p>
+        <h2>Sumercé también puede llevar<br /><em>la identidad de tu colegio.</em></h2>
+        <p class="section-lead">
+          La agenda se adapta a cada institución para que el estudiante encuentre su colegio dentro
+          de la experiencia.
+        </p>
+      </div>
+
+      <div class="school__compare">
+        <div class="school-cover">
+          <strong>SUMERCÉ</strong>
+          <small>Edición base</small>
+        </div>
+        <span class="school__arrow">→</span>
+        <div class="school-cover school-cover--branded">
+          <span class="school-cover__badge">TU COLEGIO</span>
+          <strong>SUMERCÉ</strong>
+          <small>+ identidad institucional</small>
+        </div>
+      </div>
+
+      <ul class="school__list">
+        <li>Logo institucional</li>
+        <li>Colores</li>
+        <li>Portada</li>
+        <li>Personajes</li>
+        <li>Información institucional</li>
+        <li>Manual de convivencia</li>
+        <li>Contenidos propios del colegio</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 09. CIERRE -->
+  <section class="closing">
+    <div class="container closing__inner">
+      <h2>Un año escolar también<br />puede convertirse<br /><em>en una historia.</em></h2>
+      <p>
+        Organizarse, construir hábitos, aprender y descubrir el país que nos rodea puede comenzar
+        con algo tan sencillo como abrir una agenda.
+      </p>
+      <div class="closing__actions">
+        <a class="btn btn-primary" routerLink="/contacto">Quiero conocer Sumercé <span>↗</span></a>
+        <a class="text-link" routerLink="/solicitar-cotizacion">Crear una agenda para mi colegio <span>→</span></a>
+      </div>
+    </div>
+  </section>
+</main>

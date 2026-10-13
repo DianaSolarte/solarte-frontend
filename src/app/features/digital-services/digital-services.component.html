@@ -1,0 +1,65 @@
+<main class="services-page">
+  <section class="services-hero">
+    <div class="container services-hero__grid">
+      <div>
+        <p class="section-kicker">Soluciones digitales</p>
+        <h1>No solo imprimimos.<br /><em>También digitalizamos.</em></h1>
+        <p class="services-hero__lead">
+          Además de nuestra producción editorial e impresa, ayudamos a empresas e instituciones a
+          digitalizar y automatizar procesos: atención por WhatsApp, presencia web y tareas
+          repetitivas que se pueden simplificar.
+        </p>
+        <a class="btn btn-primary" routerLink="/solicitar-cotizacion">Solicitar cotización <span>↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="services-list section">
+    <div class="container">
+      <p *ngIf="isLoading" class="empty-state">Cargando servicios…</p>
+      <p *ngIf="loadError" class="empty-state">
+        No pudimos cargar los servicios en este momento. Intenta de nuevo más tarde.
+      </p>
+
+      <div class="service-grid" *ngIf="!isLoading && !loadError">
+        <article class="service-card" *ngFor="let service of services; let i = index" [id]="service.slug">
+          <span class="service-card__number">0{{ i + 1 }}</span>
+          <h2>{{ service.name }}</h2>
+          <p class="service-card__lead">{{ service.short_description }}</p>
+          <p class="service-card__detail">{{ service.description }}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="automation-benefits section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="section-kicker">¿Qué podemos automatizar?</p>
+        <h2>Menos tiempo en tareas repetitivas.<br /><em>Más tiempo para hacer crecer tu negocio.</em></h2>
+      </div>
+      <div class="automation-benefits__grid">
+        <article><h3>Formularios</h3><p>Recibe y organiza automáticamente la información.</p></article>
+        <article><h3>Correos</h3><p>Automatiza notificaciones y respuestas.</p></article>
+        <article><h3>WhatsApp</h3><p>Optimiza procesos de atención y seguimiento.</p></article>
+        <article><h3>Solicitudes</h3><p>Centraliza información y evita tareas repetitivas.</p></article>
+        <article><h3>Procesos comerciales</h3><p>Mejora el seguimiento de clientes.</p></article>
+        <article><h3>Datos</h3><p>Reduce digitación manual y errores.</p></article>
+      </div>
+      <p class="automation-benefits__note">
+        Cuéntanos qué proceso te está quitando tiempo y estudiamos cómo mejorarlo.
+      </p>
+    </div>
+  </section>
+
+  <section class="services-cta">
+    <div class="container services-cta__inner">
+      <p class="section-kicker">¿Tienes un proceso en mente?</p>
+      <h2>Cuéntanos qué te gustaría digitalizar<br />o automatizar en tu empresa.</h2>
+      <div class="services-cta__actions">
+        <a class="btn btn-primary" routerLink="/solicitar-cotizacion">Solicitar cotización <span>↗</span></a>
+        <a class="text-link" routerLink="/contacto">Escribirnos <span>→</span></a>
+      </div>
+    </div>
+  </section>
+</main>

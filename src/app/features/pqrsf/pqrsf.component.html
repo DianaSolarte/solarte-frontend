@@ -1,0 +1,69 @@
+<section class="section container pqrsf">
+  <p class="section-kicker">Atención al cliente</p>
+  <h1 class="section-title">PQRSF</h1>
+  <p class="pqrsf__lead">
+    Solarte Editores dispone de este canal para recibir peticiones, quejas, reclamos, sugerencias
+    y felicitaciones relacionadas con nuestros productos y servicios.
+  </p>
+
+  <form class="pqrsf-form" [formGroup]="form" (ngSubmit)="submit()" *ngIf="!submitted">
+    <label>
+      <span>Tipo de solicitud</span>
+      <select formControlName="tipo">
+        <option value="" disabled>Selecciona una opción</option>
+        <option *ngFor="let tipo of tipos" [value]="tipo.value">{{ tipo.label }}</option>
+      </select>
+    </label>
+
+    <div class="form-row">
+      <label>
+        <span>Nombre completo</span>
+        <input type="text" formControlName="nombre" placeholder="Tu nombre" />
+      </label>
+      <label>
+        <span>Empresa / institución <small>(opcional)</small></span>
+        <input type="text" formControlName="empresa" placeholder="Nombre de la empresa" />
+      </label>
+    </div>
+
+    <div class="form-row">
+      <label>
+        <span>Correo electrónico</span>
+        <input type="email" formControlName="email" placeholder="correo@ejemplo.com" />
+      </label>
+      <label>
+        <span>Teléfono <small>(opcional)</small></span>
+        <input type="tel" formControlName="telefono" placeholder="Tu teléfono" />
+      </label>
+    </div>
+
+    <label>
+      <span>Número de pedido o referencia <small>(opcional)</small></span>
+      <input type="text" formControlName="referencia" placeholder="Ej: cotización #123" />
+    </label>
+
+    <label>
+      <span>Descripción de la solicitud</span>
+      <textarea rows="5" formControlName="descripcion" placeholder="Cuéntanos con detalle tu solicitud..."></textarea>
+    </label>
+
+    <label class="checkbox-label">
+      <input type="checkbox" formControlName="acepta_tratamiento_datos" />
+      <span>Autorizo el tratamiento de mis datos personales de acuerdo con la <a routerLink="/politica-privacidad" fragment="privacidad">Política de Privacidad</a>.</span>
+    </label>
+
+    <p *ngIf="submitError" class="form-message form-message--error">{{ submitError }}</p>
+
+    <button class="btn btn-primary" type="submit" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'Enviando...' : 'Enviar solicitud' }}
+    </button>
+  </form>
+
+  <div class="pqrsf-success" *ngIf="submitted">
+    <h2>Solicitud recibida</h2>
+    <p>
+      Gracias por escribirnos. Tu solicitud fue recibida correctamente y será revisada por nuestro
+      equipo. Si dejaste tu correo o teléfono, nos pondremos en contacto contigo.
+    </p>
+  </div>
+</section>

@@ -1,0 +1,169 @@
+<section class="section container">
+  <p class="section-kicker">Solicitar cotización</p>
+  <h1 class="section-title">Cuéntanos tu necesidad</h1>
+  <p class="intro">Selecciona la línea que necesitas y cuéntanos qué quieres resolver. Diseñaremos una propuesta según las características de tu proyecto.</p>
+
+  <div *ngIf="isLoading" class="notice">Cargando categorías...</div>
+  <div *ngIf="loadError" class="notice notice--error">No fue posible cargar las categorías. Verifica que el backend esté activo.</div>
+
+  <form class="quote-form" [formGroup]="quotationForm" (ngSubmit)="submit()" *ngIf="!isLoading">
+    <section class="form-section">
+      <h2>1. ¿Qué necesitas?</h2>
+      <label>
+        <span>Línea de productos o servicios</span>
+        <select formControlName="category">
+          <option [ngValue]="null">Selecciona una opción</option>
+          <option *ngFor="let category of categories" [ngValue]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </label>
+      <p class="category-description" *ngIf="selectedCategory">{{ selectedCategory.description }}</p>
+    </section>
+
+    <section class="form-section" formGroupName="contact">
+      <h2>2. Información de contacto</h2>
+    <div class="form-row">
+      <label>
+        <span>Nombre completo</span>
+        <input type="text" formControlName="full_name" placeholder="Ej: Ana María Gómez" />
+      </label>
+      <label>
+        <span>Empresa o institución</span>
+        <input type="text" formControlName="organization" placeholder="Ej: Universidad X" />
+      </label>
+    </div>
+    <div class="form-row">
+      <label>
+        <span>Cargo</span>
+        <input type="text" formControlName="position" placeholder="Ej: Coordinadora" />
+      </label>
+      <label>
+        <span>Correo electrónico</span>
+        <input type="email" formControlName="email" placeholder="correo@ejemplo.com" />
+      </label>
+    </div>
+    <div class="form-row">
+      <label>
+        <span>Teléfono</span>
+        <input type="tel" formControlName="phone" placeholder="(Opcional)" />
+      </label>
+      <label>
+        <span>Ciudad</span>
+        <input type="text" formControlName="city" placeholder="Ej: Bogotá" />
+      </label>
+    </div>
+    </section>
+
+    <section class="form-section" formGroupName="configuration">
+      <h2>3. Detalles del proyecto</h2>
+      <div *ngIf="isAgendaCategory" class="form-grid">
+        <label>
+          <span>Tipo de agenda</span>
+          <select formControlName="agenda_type">
+            <option value="">Selecciona una opción</option>
+            <option value="semanario">Semanario</option>
+            <option value="diario">Diario</option>
+            <option value="bidiario">Bidiario</option>
+            <option value="tridiario">Tridiario</option>
+          </select>
+        </label>
+        <label>
+          <span>Tipo de tapa</span>
+          <select formControlName="cover_type">
+            <option value="">Selecciona una opción</option>
+            <option value="tapa_dura">Tapa dura</option>
+            <option value="tapa_sencilla">Tapa sencilla</option>
+            <option value="cuero_agenda">Cuero agenda</option>
+            <option value="policromia">Policromía</option>
+          </select>
+        </label>
+        <label>
+          <span>Tipo de encuadernación</span>
+          <select formControlName="binding_type">
+            <option value="">Selecciona una opción</option>
+            <option value="argollada">Argollada</option>
+            <option value="encuadernada">Encuadernada</option>
+            <option value="cosida">Cosida</option>
+          </select>
+        </label>
+        <label>
+          <span>Páginas aproximadas del manual</span>
+          <input type="number" min="0" formControlName="manual_pages" placeholder="Ej: 20" />
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="includes_manual" />
+          <span>Incluye manual de convivencia</span>
+        </label>
+      </div>
+
+      <div *ngIf="isDigitalCategory" class="form-grid">
+        <label>
+          <span>¿Qué proceso quieres mejorar?</span>
+          <select formControlName="process">
+            <option value="">Selecciona una opción</option>
+            <option value="atencion_cliente">Atención al cliente</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="captura_clientes">Captura de clientes</option>
+            <option value="agendamiento">Agendamiento</option>
+            <option value="gestion_informacion">Gestión de información</option>
+            <option value="procesos_manuales">Procesos manuales</option>
+            <option value="pagina_web">Página web</option>
+            <option value="landing_page">Landing page</option>
+            <option value="dashboard">Dashboard</option>
+            <option value="otro">Otro</option>
+          </select>
+        </label>
+        <label>
+          <span>Describe cómo realizas actualmente este proceso</span>
+          <textarea rows="4" formControlName="current_process"></textarea>
+        </label>
+        <label>
+          <span>¿Qué te gustaría mejorar?</span>
+          <textarea rows="4" formControlName="desired_result"></textarea>
+        </label>
+      </div>
+
+      <div *ngIf="selectedCategory && !isAgendaCategory && !isDigitalCategory" class="form-grid">
+        <label>
+          <span>Tipo de proyecto</span>
+          <input type="text" formControlName="project_type" placeholder="Ej: Diplomas personalizados" />
+        </label>
+        <label>
+          <span>Número aproximado de páginas</span>
+          <input type="number" min="0" formControlName="page_count" placeholder="Ej: 32" />
+        </label>
+        <label>
+          <span>Tipo de impresión</span>
+          <input type="text" formControlName="print_type" placeholder="Ej: Impresión a color" />
+        </label>
+        <label>
+          <span>Tamaño</span>
+          <input type="text" formControlName="size" placeholder="Ej: Carta" />
+        </label>
+      </div>
+
+      <div *ngIf="!selectedCategory" class="notice">Selecciona una categoría para mostrar los detalles correspondientes.</div>
+    </section>
+
+    <section class="form-section" formGroupName="project">
+      <h2>4. Alcance de la solicitud</h2>
+    <div class="form-row">
+      <label>
+        <span>Cantidad aproximada</span>
+        <input type="text" formControlName="approximate_quantity" placeholder="Ej: 200 unidades" />
+      </label>
+    </div>
+    <label>
+      <span>Descripción de la necesidad</span>
+      <textarea rows="5" formControlName="description" placeholder="Explica brevemente tu necesidad..."></textarea>
+    </label>
+    </section>
+
+    <div *ngIf="submitError" class="notice notice--error">{{ submitError }}</div>
+    <div *ngIf="submitted" class="notice notice--success">Recibimos tu solicitud. Nos pondremos en contacto contigo para conocer los detalles del proyecto.</div>
+    <button class="btn btn-primary" type="submit" [disabled]="isSubmitting || submitted">
+      {{ isSubmitting ? 'Enviando...' : 'Enviar solicitud' }}
+    </button>
+  </form>
+</section>

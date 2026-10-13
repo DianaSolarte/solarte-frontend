@@ -1,0 +1,213 @@
+<main class="catalog-page">
+  <section class="catalog-hero">
+    <div class="container catalog-hero__grid">
+      <div>
+        <p class="overline">SOLARTE EDITORES / CATÁLOGO</p>
+        <h1>Todo lo que<br /><em>podemos crear.</em></h1>
+        <p>
+          Explora nuestras colecciones, productos y soluciones para
+          colegios, empresas e instituciones.
+        </p>
+      </div>
+      <div class="catalog-hero__visual">
+        <img
+          class="catalog-hero__main"
+          src="assets/AGENDAS.png"
+          alt="Agendas escolares personalizadas de Solarte Editores"
+        /><img
+          class="catalog-hero__detail"
+          src="assets/ImprentaGeneral.jpg"
+          alt="Productos impresos de Solarte Editores"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog-tools section">
+    <div class="container">
+      <label class="search-box"
+        ><span>⌕</span
+        ><input
+          type="search"
+          placeholder="¿Qué estás buscando?"
+          [(ngModel)]="query"
+          (ngModelChange)="applyFilters()"
+      /></label>
+      <nav class="category-nav" aria-label="Categorías del catálogo">
+        <button
+          *ngFor="let category of categories"
+          type="button"
+          [class.is-active]="activeCategory === category"
+          (click)="selectCategory(category)"
+        >
+          {{ category }}
+        </button>
+      </nav>
+    </div>
+  </section>
+
+  <section class="featured section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Una primera mirada</p>
+          <h2>Productos<br /><em>destacados.</em></h2>
+        </div>
+        <p>Una selección para descubrir la variedad de Solarte.</p>
+      </div>
+      <div class="featured-grid">
+        <button
+          *ngFor="let product of featuredProducts"
+          type="button"
+          class="featured-product"
+          (click)="openProduct(product)"
+        >
+          <img
+            *ngIf="product.image; else featuredPending"
+            [src]="product.image"
+            [alt]="product.name"
+          /><ng-template #featuredPending
+            ><span class="image-pending"
+              >Imagen pendiente</span
+            ></ng-template
+          ><span>{{ product.category }}</span
+          ><strong>{{ product.name }}</strong
+          ><b>Ver producto →</b>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog-results section">
+    <div class="container">
+      <div class="results-heading">
+        <p class="section-kicker">Explorar catálogo</p>
+        <h2>
+          {{
+            activeCategory === 'Todos'
+              ? 'Todas las colecciones.'
+              : activeCategory + '.'
+          }}
+        </h2>
+        <span>{{ filteredProducts.length }} resultados</span>
+      </div>
+      <div class="product-grid">
+        <article
+          *ngFor="let product of filteredProducts"
+          class="product-card"
+        >
+          <button
+            type="button"
+            class="product-card__image"
+            (click)="openProduct(product)"
+          >
+            <img
+              *ngIf="product.image; else productPending"
+              [src]="product.image"
+              [alt]="product.name"
+            /><ng-template #productPending
+              ><span class="image-pending"
+                >Imagen pendiente</span
+              ></ng-template
+            ><span *ngIf="product.image">Ver producto ↗</span>
+          </button>
+          <div class="product-card__copy">
+            <small>{{ product.category }}</small>
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <button
+              type="button"
+              class="text-link"
+              (click)="openProduct(product)"
+            >
+              Ver producto <span>→</span>
+            </button>
+          </div>
+        </article>
+        <p *ngIf="isLoading" class="empty-state">Cargando catálogo…</p>
+        <p *ngIf="loadError" class="empty-state">
+          No pudimos cargar el catálogo en este momento. Intenta de nuevo
+          más tarde.
+        </p>
+        <p
+          *ngIf="!isLoading && !loadError && filteredProducts.length === 0"
+          class="empty-state"
+        >
+          No encontramos esa solución. Cuéntanos qué necesitas y la pensamos
+          contigo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog-cta section">
+    <div class="container catalog-cta__inner">
+      <p class="section-kicker">El siguiente paso</p>
+      <h2>¿Encontraste lo que buscabas?<br /></h2>
+      <p>
+        Cuéntanos qué producto necesitas y te ayudamos a convertirlo en una
+        propuesta para tu proyecto.
+      </p>
+      <a class="btn btn-primary" routerLink="/solicitar-cotizacion"
+        >Solicitar cotización <span>↗</span></a
+      ><a class="text-link" routerLink="/contacto"
+        >Cuéntanos tu idea <span>→</span></a
+      >
+    </div>
+  </section>
+
+  <div
+    *ngIf="selectedProduct"
+    class="detail-backdrop"
+    (click)="closeProduct()"
+  >
+    <section
+      class="product-detail"
+      role="dialog"
+      aria-modal="true"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        type="button"
+        class="detail-close"
+        aria-label="Cerrar detalle"
+        (click)="closeProduct()"
+      >
+        ×
+      </button>
+      <div class="detail-gallery">
+        <img
+          *ngIf="selectedProduct.gallery.length; else detailPending"
+          [src]="selectedProduct.gallery[activeImageIndex]"
+          [alt]="selectedProduct.name"
+        /><ng-template #detailPending
+          ><div class="detail-pending">Imagen pendiente</div></ng-template
+        >
+        <div *ngIf="selectedProduct.gallery.length">
+          <button
+            *ngFor="let image of selectedProduct.gallery; let index = index"
+            type="button"
+            [class.is-active]="activeImageIndex === index"
+            (click)="activeImageIndex = index"
+          >
+            <img [src]="image" alt="" />
+          </button>
+        </div>
+      </div>
+      <div class="detail-copy">
+        <small>{{ selectedProduct.category }}</small>
+        <h2>{{ selectedProduct.name }}</h2>
+        <p>{{ selectedProduct.details }}</p>
+        <p class="detail-note">
+          Personalizable según proyecto. Consultar opciones disponibles.
+        </p>
+        <a
+          class="btn btn-primary"
+          routerLink="/solicitar-cotizacion"
+          (click)="closeProduct()"
+          >Solicitar cotización <span>↗</span></a
+        >
+      </div>
+    </section>
+  </div>
+</main>

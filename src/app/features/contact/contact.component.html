@@ -1,0 +1,63 @@
+<section class="section container contact">
+  <p class="section-kicker">Contacto</p>
+  <h1 class="section-title">Estamos listos para ayudarte</h1>
+
+  <div class="quick-options">
+    <p class="quick-options__label">¿Qué necesitas?</p>
+    <div class="quick-options__grid">
+      <a
+        *ngFor="let option of quickOptions"
+        class="quick-option"
+        routerLink="/solicitar-cotizacion"
+        [queryParams]="option.categoria ? { categoria: option.categoria } : {}"
+      >
+        {{ option.label }} <span>→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="contact__grid">
+    <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="submit()">
+      <label>
+        <span>Nombre</span>
+        <input type="text" formControlName="name" placeholder="Tu nombre" />
+      </label>
+      <label>
+        <span>Correo electrónico</span>
+        <input type="email" formControlName="email" placeholder="correo@ejemplo.com" />
+      </label>
+      <label>
+        <span>Asunto</span>
+        <input type="text" formControlName="subject" placeholder="Asunto" />
+      </label>
+      <label>
+        <span>Mensaje</span>
+        <textarea rows="5" formControlName="message" placeholder="Escribe tu mensaje..."></textarea>
+      </label>
+      <label>
+        <span>Teléfono <small>(opcional)</small></span>
+        <input type="tel" formControlName="phone" placeholder="Tu teléfono" />
+      </label>
+      <p *ngIf="submitError" class="form-message form-message--error">{{ submitError }}</p>
+      <p *ngIf="submitted" class="form-message form-message--success">Recibimos tu mensaje. Nos pondremos en contacto contigo.</p>
+      <button class="btn btn-primary" type="submit" [disabled]="isSubmitting || submitted">
+        {{ isSubmitting ? 'Enviando...' : 'Enviar mensaje' }}
+      </button>
+    </form>
+
+    <aside class="contact__details">
+      <div>
+        <h3>Teléfono</h3>
+        <p>Director comercial: 321 311 0514</p>
+      </div>
+      <div>
+        <h3>Correo</h3>
+        <p>Comunicaciones: solarteeditores@gmail.com</p>
+      </div>
+      <div>
+        <h3>Ubicación</h3>
+        <p>Ubicación : Bogotá, Colombia - Entregas a todo el país</p>
+      </div>
+    </aside>
+  </div>
+</section>

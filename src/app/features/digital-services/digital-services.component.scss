@@ -1,0 +1,157 @@
+.services-page {
+  overflow: hidden;
+}
+
+.services-hero {
+  background: var(--color-espresso);
+  padding: 6rem 0;
+  color: var(--color-ivory);
+}
+
+.services-hero__grid > div {
+  max-width: 640px;
+}
+
+.services-hero .section-kicker {
+  color: var(--color-gold);
+}
+
+.services-hero h1 {
+  margin: 1rem 0 1.5rem;
+  color: var(--color-ivory);
+  font-family: Georgia, serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.services-hero h1 em {
+  color: var(--color-gold);
+  font-style: italic;
+}
+
+.services-hero__lead {
+  margin: 0 0 2rem;
+  color: rgba(255, 253, 249, 0.78);
+  font-size: 1.05rem;
+}
+
+.services-hero .btn-primary {
+  background: var(--color-gold);
+  color: var(--color-espresso);
+}
+
+.services-list {
+  background: var(--color-ivory);
+}
+
+.empty-state {
+  color: var(--color-gray-deep);
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.service-card {
+  border-top: 3px solid var(--color-red);
+  padding: 1.6rem 0 0;
+}
+
+.service-card__number {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--color-red);
+  font-family: Georgia, serif;
+  font-size: 1.8rem;
+}
+
+.service-card h2 {
+  margin: 0 0 0.8rem;
+  color: var(--color-espresso);
+  font-family: Georgia, serif;
+  font-size: 1.9rem;
+  font-weight: 400;
+}
+
+.service-card__lead {
+  margin: 0 0 1rem;
+  color: var(--color-carbon);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.service-card__detail {
+  margin: 0;
+  color: var(--color-gray-deep);
+  font-size: 0.9rem;
+}
+
+.automation-benefits {
+  background: var(--color-paper);
+}
+
+.automation-benefits .section-heading {
+  max-width: 700px;
+  margin: 0 0 2.5rem;
+}
+
+.automation-benefits__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem 2rem;
+}
+
+.automation-benefits__grid h3 {
+  margin: 0 0 0.4rem;
+  color: var(--color-espresso);
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.automation-benefits__grid p {
+  margin: 0;
+  color: var(--color-gray-deep);
+  font-size: 0.85rem;
+}
+
+.automation-benefits__note {
+  margin: 2.5rem 0 0;
+  color: var(--color-carbon);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
+.services-cta {
+  padding: 6rem 0;
+  background: var(--color-paper);
+  text-align: center;
+}
+
+.services-cta h2 {
+  margin: 1rem 0 2rem;
+  color: var(--color-espresso);
+  font-family: Georgia, serif;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  font-weight: 400;
+}
+
+.services-cta__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 840px) {
+  .service-grid,
+  .automation-benefits__grid {
+    grid-template-columns: 1fr;
+  }
+}

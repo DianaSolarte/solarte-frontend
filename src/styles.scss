@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap");
+
+:root {
+  --color-carbon: #292929;
+  --color-espresso: #211c18;
+  --color-gold: #b18a3b;
+  --color-red: #a51d2d;
+  --color-white: #fffdf9;
+  --color-ivory: #f5f0e8;
+  --color-paper: #e8dfd2;
+  --color-gray-deep: #716960;
+  --color-text: #29231f;
+  --color-surface: #eee6da;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --container: 1240px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "DM Sans", "Helvetica Neue", sans-serif;
+  background: var(--color-ivory);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.container {
+  width: min(var(--container), calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.section {
+  padding: 7rem 0;
+}
+
+.section-title {
+  margin: 0 0 1rem;
+  color: var(--color-carbon);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.7rem, 6vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.section-kicker {
+  margin: 0 0 1rem;
+  color: var(--color-red);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.text-muted {
+  color: var(--color-gray-deep);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 0;
+  padding: 0.9rem 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--color-red);
+  color: var(--color-white);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-carbon);
+  border: 1px solid rgba(41, 41, 41, 0.35);
+}
+

@@ -1,0 +1,53 @@
+<main class="faq-page">
+  <section class="faq-hero section">
+    <div class="container">
+      <p class="section-kicker">Ayuda</p>
+      <h1 class="section-title">Preguntas frecuentes</h1>
+      <p class="faq-hero__lead">
+        Encuentra respuestas rápidas sobre nuestros productos, personalización, cotizaciones y
+        tiempos de entrega. Si no encuentras lo que buscas, escríbenos.
+      </p>
+    </div>
+  </section>
+
+  <section class="faq-content section">
+    <div class="container">
+      <div class="faq-category" *ngFor="let category of categories; let ci = index">
+        <h2>{{ category.title }}</h2>
+        <div class="faq-item" *ngFor="let item of category.items; let ii = index">
+          <button
+            type="button"
+            class="faq-item__question"
+            [attr.aria-expanded]="isOpen(ci, ii)"
+            (click)="toggle(ci, ii)"
+          >
+            <span>{{ item.question }}</span>
+            <em>{{ isOpen(ci, ii) ? '−' : '+' }}</em>
+          </button>
+          <p class="faq-item__answer" *ngIf="isOpen(ci, ii)">{{ item.answer }}</p>
+        </div>
+      </div>
+
+      <div class="faq-guarantees">
+        <h2>Garantías y condiciones</h2>
+        <ul>
+          <li>Los productos se elaboran según las especificaciones aprobadas en la cotización.</li>
+          <li>Es importante revisar las condiciones de la cotización antes de aprobarla.</li>
+          <li>Los tiempos de entrega dependen del producto y del proyecto.</li>
+          <li>Los productos personalizados pueden tener condiciones especiales de producción, aprobación y cancelación.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-cta">
+    <div class="container faq-cta__inner">
+      <p class="section-kicker">¿No encontraste tu respuesta?</p>
+      <h2>Escríbenos y te ayudamos.</h2>
+      <div class="faq-cta__actions">
+        <a class="btn btn-primary" routerLink="/solicitar-cotizacion">Solicitar cotización <span>↗</span></a>
+        <a class="text-link" routerLink="/contacto">Contáctanos <span>→</span></a>
+      </div>
+    </div>
+  </section>
+</main>
